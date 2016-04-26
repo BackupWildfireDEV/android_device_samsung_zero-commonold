@@ -189,6 +189,19 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf
 
+# RIL
+PRODUCT_PROPERTY_OVERRIDES += \
+    rild.libargs=-d /dev/ttyS0 \
+    rild.libpath=/system/lib64/libsec-ril.so \
+    ro.ril.hsxpa=1 \
+    ro.ril.gprsclass=10 \
+    ro.telephony.ril_class=zeroRIL \
+    telephony.lteOnGsmDevice=1 \
+    ro.telephony.default_network=9 \
+    ro.use_data_netmgrd=false \
+    persist.data.netmgrd.qos.enable=false \
+    ro.ril.telephony.mqanelements=6
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
     $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf

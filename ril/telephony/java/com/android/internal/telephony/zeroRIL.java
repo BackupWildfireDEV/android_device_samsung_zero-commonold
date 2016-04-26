@@ -41,6 +41,16 @@ public class zeroRIL extends RIL implements CommandsInterface {
 
     private boolean DBG = false;
 
+    static final boolean RILJ_LOGD = true;
+    static final boolean RILJ_LOGV = true;
+ 
+    private static final int RIL_REQUEST_DIAL_EMERGENCY_CALL = 10001;
+ 
+    private static final int RIL_UNSOL_DEVICE_READY_NOTI = 11008;
+    private static final int RIL_UNSOL_AM = 11010;
+    private static final int RIL_UNSOL_SIM_PB_READY = 11021;
+    private static final int RIL_UNSOL_DUN = 11060;
+
     public zeroRIL(Context context, int preferredNetworkType,
             int cdmaSubscription, Integer instanceId) {
         super(context, preferredNetworkType, cdmaSubscription, instanceId);
@@ -126,6 +136,7 @@ public class zeroRIL extends RIL implements CommandsInterface {
             p.readInt(); // samsung call detail
             p.readString(); // samsung call detail
             dc.isVoicePrivacy = (0 != p.readInt());
+
             dc.number = p.readString();
             int np = p.readInt();
             dc.numberPresentation = DriverCall.presentationFromCLIP(np);
